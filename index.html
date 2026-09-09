@@ -616,6 +616,43 @@ h1{
     }
   }
 })();
+
+/* ============================================================
+   Idle reload: with no input for 30s the page reloads, so the
+   intro animation replays. On an untouched signage TV this makes
+   the banner loop; any interaction restarts the countdown.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var IDLE_MS = 30000;
+  var timer = null;
+
+  function reload() {
+    /* replace() keeps the TV browser's back-history from growing */
+    location.replace(location.href);
+  }
+
+  function restart() {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(reload, IDLE_MS);
+  }
+
+  var events = ["mousemove", "mousedown", "click", "keydown",
+                "touchstart", "wheel", "scroll"];
+  for (var i = 0; i < events.length; i++) {
+    window.addEventListener(events[i], restart, { passive: true });
+  }
+
+  /* pause the countdown while the page is hidden (TV input switched
+     away, browser backgrounded) and restart it on return */
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) { if (timer) clearTimeout(timer); }
+    else { restart(); }
+  });
+
+  restart();
+})();
 </script>
 </body>
 </html>
