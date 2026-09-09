@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome to Fuji-Haya Electric</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   FUJI-HAYA ELECTRIC - Welcome Banner  (large-format / 65" TV)
+   Palette locked to the brand guide:
+   #0D0DCC  #013f8e  #FFFFFF  #2E2E2E  #E6E8EB  #FFC107  #607D8B
+   Type: Montserrat (headings) / Open Sans (body)
+   ============================================================ */
+:root{
+  --fh-blue:#0D0DCC;
+  --fh-navy:#013f8e;
+  --fh-white:#FFFFFF;
+  --fh-ink:#2E2E2E;
+  --fh-mist:#E6E8EB;
+  --fh-amber:#FFC107;
+  --fh-steel:#607D8B;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:
+    radial-gradient(1400px 800px at 50% 0%, #0b1140 0%, transparent 70%),
+    linear-gradient(160deg,#05071e 0%,#02030f 100%);
+  font-family:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:#FFFFFF;
+  display:grid;
+  place-items:center;
+  padding:1.6vw;
+  padding:clamp(10px,1.6vw,34px);
+  min-height:100vh;
+  overflow:hidden;
+}
+
+/* ---------- Stage / perspective ---------- */
+.stage{
+  width:100%;max-width:2400px;   /* fallback for browsers without min() */
+  width:min(2400px,100%);
+  perspective:1800px;
+  perspective-origin:50% 45%;
+}
+.banner{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/8;
+  max-height:calc(100vh - 3.2vw);
+  max-height:calc(100vh - clamp(20px,3.2vw,68px));
+  min-height:320px;
+  border-radius:1.6vw;
+  border-radius:clamp(16px,1.6vw,30px);
+  overflow:hidden;
+  isolation:isolate;
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.22,.61,.36,1);
+  background:
+    radial-gradient(120% 150% at 50% 8%, rgba(13,13,204,.58) 0%, transparent 58%),
+    radial-gradient(90% 120% at 0% 100%, rgba(1,63,142,.65) 0%, transparent 60%),
+    linear-gradient(115deg,#020417 0%,#061033 38%,#0a1a52 62%,#040a24 100%);
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.10) inset,
+    0 -1px 0 rgba(0,0,0,.55) inset,
+    0 40px 90px -30px rgba(0,0,0,.92),
+    0 0 0 1px rgba(255,255,255,.08),
+    0 0 110px -38px rgba(13,13,204,.95);
+  animation:bannerIn 1.1s cubic-bezier(.2,.7,.25,1) both;
+}
+@keyframes bannerIn{
+  from{opacity:0;transform:translateY(26px) rotateX(7deg) scale(.975)}
+  to{opacity:1;transform:none}
+}
+
+/* ---------- Background layers ---------- */
+.layer{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;pointer-events:none}
+
+.grid{
+  background-image:
+    linear-gradient(rgba(96,125,139,.16) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(96,125,139,.16) 1px,transparent 1px);
+  background-size:4vw 4vw;
+  background-size:clamp(46px,4vw,84px) clamp(46px,4vw,84px);
+  -webkit-mask-image:radial-gradient(120% 120% at 50% 45%,#000 8%,transparent 74%);
+  mask-image:radial-gradient(120% 120% at 50% 45%,#000 8%,transparent 74%);
+  opacity:.5;
+  animation:gridDrift 26s linear infinite;
+}
+@keyframes gridDrift{to{background-position:84px 84px,84px 84px}}
+
+.glow-a,.glow-b{position:absolute;filter:blur(60px);mix-blend-mode:screen;pointer-events:none}
+.glow-a{
+  background:radial-gradient(closest-side,rgba(13,13,204,.9),transparent 70%);
+  width:64%;height:170%;left:18%;top:-36%;
+  animation:pulseA 7.5s ease-in-out infinite;
+}
+.glow-b{
+  background:radial-gradient(closest-side,rgba(255,193,7,.30),transparent 70%);
+  width:46%;height:120%;left:27%;top:24%;
+  animation:pulseB 9.5s ease-in-out infinite;
+}
+@keyframes pulseA{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.07)}}
+@keyframes pulseB{0%,100%{opacity:.4;transform:scale(1.05)}50%{opacity:.78;transform:scale(.95)}}
+
+/* Specular sheen sweeping across the plate */
+.sheen{
+  background:linear-gradient(105deg,transparent 32%,rgba(255,255,255,.10) 46%,rgba(255,255,255,.26) 50%,rgba(255,255,255,.10) 54%,transparent 68%);
+  transform:translateX(-120%);
+  animation:sheen 7s cubic-bezier(.5,0,.2,1) 1.4s infinite;
+}
+@keyframes sheen{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+
+.vignette{background:radial-gradient(120% 130% at 50% 45%,transparent 50%,rgba(0,0,0,.66) 100%)}
+.topline{
+  position:absolute;left:0;right:0;top:0;height:2px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),rgba(255,193,7,.9),rgba(255,255,255,.55),transparent);
+  opacity:.75;
+}
+#fx{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+
+/* ---------- Content (single centred column) ---------- */
+.content{
+  position:absolute;top:0;right:0;bottom:0;left:0;inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:1.4vw;
+  gap:clamp(10px,1.4vw,26px);
+  padding:3vw 3.4vw;
+  padding:clamp(18px,3vw,56px) clamp(20px,3.4vw,64px);
+  transform-style:preserve-3d;
+}
+
+/* Brand lockup - pinned to the top-left corner */
+.lockup{
+  position:absolute;
+  top:3.4vw;
+  top:clamp(26px,3.4vw,74px);
+  left:4vw;
+  left:clamp(30px,4vw,86px);
+  display:flex;align-items:center;
+  gap:1.1vw;
+  gap:clamp(9px,1.1vw,20px);
+  transform:translateZ(40px);
+  animation:rise 1s cubic-bezier(.2,.7,.25,1) .15s both;
+}
+.mark{
+  width:4.6vw;
+  width:clamp(46px,4.6vw,108px);
+  height:auto;flex:none;display:block;
+  border-radius:9.6%;              /* clips the PNG's opaque white corners to the badge outline */
+  filter:drop-shadow(0 12px 24px rgba(0,0,0,.65)) drop-shadow(0 0 30px rgba(13,13,204,.8));
+  animation:markFloat 6s ease-in-out infinite;
+}
+@keyframes markFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.divider{
+  width:2px;height:3.4vw;
+  width:2px;height:clamp(30px,3.4vw,76px);
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.55),transparent);
+}
+.corp{line-height:1.3;text-align:left}
+.corp .name{
+  font-family:"Montserrat","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;
+  font-size:1.1vw;
+  font-size:clamp(10px,1.1vw,25px);
+  color:#FFFFFF;
+  text-shadow:0 2px 12px rgba(0,0,0,.6);
+}
+.corp .sub{
+  font-weight:300;letter-spacing:.22em;text-transform:uppercase;
+  font-size:.7vw;
+  font-size:clamp(7px,.7vw,16px);
+  color:#E6E8EB;opacity:.85;margin-top:4px;
+}
+
+/* ---------- Headline (the hero) ---------- */
+h1{
+  font-family:"Montserrat","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  margin:.8vw 0 0;
+  margin:clamp(4px,.8vw,16px) 0 0;
+  line-height:1.0;
+  perspective:1400px;
+  transform:translateZ(70px);
+  font-size:8.6vw;   /* scales up to 65" TV */
+  font-size:clamp(32px,8.6vw,250px);   /* scales up to 65" TV */
+}
+
+/* line 1 - "WELCOME TO" */
+.l1{
+  display:block;
+  font-size:.30em;
+  font-weight:700;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  margin-bottom:.34em;
+  color:#dfe6ff;
+  text-shadow:0 2px 18px rgba(0,0,0,.7);
+}
+.l1 .w{
+  display:inline-block;
+  animation:wordIn 1s cubic-bezier(.2,.8,.2,1) both;
+}
+.l1 .w:nth-child(1){animation-delay:.30s}
+.l1 .w:nth-child(2){animation-delay:.42s}
+@keyframes wordIn{
+  from{opacity:0;transform:translateY(.7em) rotateX(-75deg);filter:blur(8px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+
+/* line 2 - "Fuji-Haya Electric" */
+.l2-wrap{
+  display:inline-block;
+  transform-origin:50% 60%;
+  animation:
+    nameIn 1.1s cubic-bezier(.2,.8,.2,1) .60s both,
+    flicker 1.5s ease-out .62s both;
+}
+@keyframes nameIn{
+  from{transform:translateY(.22em) scale(.88);filter:blur(20px)}
+  to{transform:none;filter:blur(0)}
+}
+/* electrical power-on flicker */
+@keyframes flicker{
+  0%{opacity:0}
+  10%{opacity:1}
+  14%{opacity:.18}
+  20%{opacity:1}
+  26%{opacity:.35}
+  32%{opacity:1}
+  38%{opacity:.62}
+  46%,100%{opacity:1}
+}
+.l2{
+  display:block;
+  font-weight:900;
+  letter-spacing:-.02em;
+  white-space:nowrap;
+  background:linear-gradient(96deg,#ffffff 0%,#dfe6ff 20%,#FFC107 50%,#ffffff 76%,#cfd8ff 100%);
+  background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  animation:
+    shift 9s ease-in-out 1.9s infinite,
+    breathe 4.5s ease-in-out 1.9s infinite;
+}
+@keyframes shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes breathe{
+  0%,100%{filter:drop-shadow(0 16px 34px rgba(0,0,0,.6)) drop-shadow(0 0 26px rgba(255,193,7,.24))}
+  50%    {filter:drop-shadow(0 16px 34px rgba(0,0,0,.6)) drop-shadow(0 0 62px rgba(255,193,7,.60))}
+}
+
+/* Amber current rail under the headline */
+.rule{
+  position:relative;overflow:hidden;
+  width:26vw;
+  width:clamp(120px,26vw,760px);
+  height:.34vw;
+  height:clamp(3px,.34vw,8px);
+  border-radius:99px;
+  transform:translateZ(60px);
+  background:linear-gradient(90deg,rgba(255,193,7,0),#FFC107 22%,#ffdd7a 50%,#FFC107 78%,rgba(255,193,7,0));
+  box-shadow:0 0 26px rgba(255,193,7,.7),0 2px 8px rgba(0,0,0,.5);
+  animation:ruleIn 1.1s cubic-bezier(.2,.8,.2,1) 1.15s both;
+}
+@keyframes ruleIn{from{transform:translateZ(60px) scaleX(0);opacity:0}to{transform:translateZ(60px) scaleX(1);opacity:1}}
+/* travelling current pulse */
+.rule::after{
+  content:"";position:absolute;top:0;right:0;bottom:0;left:0;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.95) 50%,transparent 100%);
+  width:26%;
+  animation:current 3.4s cubic-bezier(.5,0,.4,1) 2.2s infinite;
+}
+@keyframes current{
+  0%{transform:translateX(-140%)}
+  60%,100%{transform:translateX(520%)}
+}
+
+/* Corner tech ticks */
+.corner{
+  position:absolute;
+  width:2.2vw;height:2.2vw;
+  width:clamp(22px,2.2vw,52px);height:clamp(22px,2.2vw,52px);
+  border:2px solid rgba(255,255,255,.28);opacity:.7;pointer-events:none;
+}
+.c2{top:1.4vw;right:1.4vw;border-left:0;border-bottom:0;border-radius:0 10px 0 0}
+.c2{top:clamp(14px,1.4vw,32px);right:clamp(14px,1.4vw,32px);border-left:0;border-bottom:0;border-radius:0 10px 0 0}
+.c3{bottom:1.4vw;left:1.4vw;border-right:0;border-top:0;border-radius:0 0 0 10px}
+.c3{bottom:clamp(14px,1.4vw,32px);left:clamp(14px,1.4vw,32px);border-right:0;border-top:0;border-radius:0 0 0 10px}
+.c4{bottom:1.4vw;right:1.4vw;border-left:0;border-top:0;border-radius:0 0 10px 0}
+.c4{bottom:clamp(14px,1.4vw,32px);right:clamp(14px,1.4vw,32px);border-left:0;border-top:0;border-radius:0 0 10px 0}
+
+/* Lightning flash overlay driven by JS */
+.flash{
+  position:absolute;top:0;right:0;bottom:0;left:0;inset:0;pointer-events:none;
+  background:radial-gradient(70% 80% at 50% 46%,rgba(255,255,255,.5),transparent 62%);
+  opacity:0;mix-blend-mode:screen;
+}
+
+@keyframes rise{from{opacity:0;transform:translateZ(40px) translateY(20px)}to{opacity:1;transform:translateZ(40px)}}
+
+/* ---------- Legacy smart-TV fallbacks (classes set by JS) ---------- */
+/* no flexbox gap support (Chromium < 84, many 2019-2021 TVs) */
+.no-flex-gap .content > * + *{margin-top:1.4vw}
+.no-flex-gap .lockup  > * + *{margin-left:1.1vw}
+
+/* "lite" mode: switched on automatically when the TV can't keep up */
+.lite #fx{display:none}
+.lite .sheen{display:none}
+.lite .glow-a,.lite .glow-b{filter:blur(26px)}
+.lite .grid{animation:none}
+.lite .mark{animation:none}
+.lite .l2{animation:shift 9s ease-in-out 1.9s infinite;
+          filter:drop-shadow(0 12px 26px rgba(0,0,0,.6))}
+.lite .rule::after{animation-duration:5s}
+
+/* ---------- Responsive ---------- */
+@media (max-width:880px){
+  .banner{aspect-ratio:4/5;max-height:none}
+  h1{font-size:10vw}
+  h1{font-size:clamp(30px,10vw,64px)}
+  .l2{white-space:normal}
+  .l1{letter-spacing:.22em}
+  .lockup{top:22px;left:22px;gap:9px}
+  .mark{width:44px}
+  .divider{height:30px}
+  .corp .name{font-size:11px}
+  .corp .sub{font-size:7.5px;letter-spacing:.16em;max-width:15ch}
+  .corner{width:20px;height:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <section class="banner" id="banner" aria-label="Welcome to Fuji-Haya Electric">
+
+    <!-- background stack -->
+    <div class="layer grid"></div>
+    <span class="glow-a"></span>
+    <span class="glow-b"></span>
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <div class="layer sheen"></div>
+    <div class="layer vignette"></div>
+    <div class="topline"></div>
+    <div class="flash" id="flash"></div>
+    <span class="corner c2"></span>
+    <span class="corner c3"></span><span class="corner c4"></span>
+
+    <div class="content">
+
+      <div class="lockup">
+        <!-- ===== FUJI-HAYA MARK (official logo asset) ===== -->
+        <img class="mark" src="logo.png" alt="Fuji-Haya Electric Corporation of the Philippines logo">
+
+        <span class="divider"></span>
+        <div class="corp">
+          <div class="name">Fuji-Haya</div>
+          <div class="sub">Electric Corporation of the Philippines</div>
+        </div>
+      </div>
+
+      <h1>
+        <span class="l1"><span class="w">Welcome</span> <span class="w">to</span></span>
+        <span class="l2-wrap"><span class="l2">Fuji-Haya Electric</span></span>
+      </h1>
+
+      <div class="rule"></div>
+
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var root    = document.documentElement;
+  var mm      = window.matchMedia ? window.matchMedia.bind(window) : null;
+  var reduced = mm ? mm("(prefers-reduced-motion: reduce)").matches : false;
+  var banner  = document.getElementById("banner");
+  var flash   = document.getElementById("flash");
+  var canvas  = document.getElementById("fx");
+  var ctx     = canvas.getContext("2d");
+
+  /* ---------------- legacy smart-TV fallbacks ---------------- */
+  var supports = (window.CSS && CSS.supports) ? CSS.supports.bind(CSS) : function () { return false; };
+  var hasAspect = supports("aspect-ratio", "16 / 8");
+
+  /* flexbox row-gap detection (Chromium < 84 parses gap but ignores it in flex) */
+  function flexGapSupported() {
+    var f = document.createElement("div");
+    f.style.cssText = "display:flex;flex-direction:column;row-gap:10px;position:absolute;visibility:hidden";
+    f.appendChild(document.createElement("div"));
+    f.appendChild(document.createElement("div"));
+    document.body.appendChild(f);
+    var ok = f.scrollHeight === 10;
+    f.parentNode.removeChild(f);
+    return ok;
+  }
+  try { if (!flexGapSupported()) root.className += " no-flex-gap"; } catch (e) {}
+
+  /* aspect-ratio fallback: size the banner explicitly */
+  function applyAspect() {
+    if (hasAspect) return;
+    var portrait = window.innerWidth <= 880;
+    var ratio = portrait ? 1.25 : 0.5;                 /* h / w : 4/5 and 16/8 */
+    var h = banner.offsetWidth * ratio;
+    if (!portrait) {
+      var cap = window.innerHeight - Math.min(68, window.innerWidth * 0.032);
+      if (h > cap) h = cap;
+    }
+    banner.style.height = Math.max(320, Math.round(h)) + "px";
+  }
+
+  /* ---------------- spark / arc field ---------------- */
+  var W = 0, H = 0, dpr = 1;
+  var sparks = [];
+  var arcs = [];
+
+  function resize() {
+    applyAspect();
+    var r = banner.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    canvas.width  = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    seed();
+  }
+
+  function seed() {
+    var count = Math.max(30, Math.min(110, Math.round(W / 18)));
+    sparks = [];
+    for (var i = 0; i < count; i++) {
+      sparks.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 2.1 + 0.6,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: -(Math.random() * 0.32 + 0.07),
+        a: Math.random() * 0.55 + 0.18,
+        t: Math.random() * Math.PI * 2,
+        amber: Math.random() < 0.34
+      });
+    }
+  }
+
+  /* jagged micro-lightning that fires occasionally */
+  function makeArc() {
+    var x = W * (0.06 + Math.random() * 0.88);
+    var y = H * (0.10 + Math.random() * 0.80);
+    var pts = [{ x: x, y: y }];
+    var segs = 5 + Math.floor(Math.random() * 4);
+    var dir = Math.random() * Math.PI * 2;
+    var scale = Math.max(1, W / 1200);
+    for (var i = 0; i < segs; i++) {
+      dir += (Math.random() - 0.5) * 1.5;
+      var len = (12 + Math.random() * 26) * scale;
+      x += Math.cos(dir) * len;
+      y += Math.sin(dir) * len;
+      pts.push({ x: x, y: y });
+    }
+    arcs.push({ pts: pts, life: 1 });
+  }
+
+  /* performance watchdog: weak TV chips fall back to "lite" mode */
+  var running = true, fpsFrames = 0, fpsStart = 0;
+  function degrade() {
+    running = false;
+    root.className += " lite";
+  }
+
+  var now0 = (window.performance && performance.now) ? performance.now() : Date.now();
+  var t0 = now0;
+  function frame(now) {
+    if (!running) return;
+    var dt = Math.min(48, now - t0); t0 = now;
+
+    /* sample once, only after the entrance animations have settled */
+    if (fpsStart !== -1 && now - now0 > 2500) {
+      if (fpsStart === 0) { fpsStart = now; }
+      else {
+        fpsFrames++;
+        var span = now - fpsStart;
+        if (span > 3000) {
+          if (fpsFrames * 1000 / span < 24) { degrade(); return; }
+          fpsStart = -1;                    /* healthy: stop measuring */
+        }
+      }
+    }
+
+    ctx.clearRect(0, 0, W, H);
+
+    for (var i = 0; i < sparks.length; i++) {
+      var s = sparks[i];
+      s.t += 0.016;
+      s.x += s.vx + Math.sin(s.t) * 0.16;
+      s.y += s.vy;
+      if (s.y < -12) { s.y = H + 10; s.x = Math.random() * W; }
+      if (s.x < -12) s.x = W + 10;
+      if (s.x > W + 12) s.x = -10;
+
+      var tw = s.a * (0.6 + 0.4 * Math.sin(s.t * 2.1));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.amber ? "rgba(255,193,7," + tw + ")" : "rgba(210,224,255," + tw + ")";
+      ctx.shadowBlur = s.amber ? 14 : 10;
+      ctx.shadowColor = s.amber ? "rgba(255,193,7,.85)" : "rgba(150,180,255,.75)";
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    for (var j = arcs.length - 1; j >= 0; j--) {
+      var a = arcs[j];
+      a.life -= dt / 320;
+      if (a.life <= 0) { arcs.splice(j, 1); continue; }
+      ctx.beginPath();
+      ctx.moveTo(a.pts[0].x, a.pts[0].y);
+      for (var k = 1; k < a.pts.length; k++) ctx.lineTo(a.pts[k].x, a.pts[k].y);
+      ctx.strokeStyle = "rgba(255,255,255," + (a.life * 0.72) + ")";
+      ctx.lineWidth = Math.max(1.6, W / 900);
+      ctx.shadowBlur = 18;
+      ctx.shadowColor = "rgba(120,160,255,.95)";
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    raf(frame);
+  }
+
+  /* ---------------- pointer parallax (3D tilt) ---------------- */
+  function tilt(e) {
+    var r = banner.getBoundingClientRect();
+    var px = (e.clientX - r.left) / r.width  - 0.5;
+    var py = (e.clientY - r.top)  / r.height - 0.5;
+    banner.style.transition = "transform .18s ease-out";
+    banner.style.transform =
+      "rotateY(" + (px * 6).toFixed(2) + "deg) rotateX(" + (-py * 4).toFixed(2) + "deg) translateZ(10px)";
+  }
+  function untilt() {
+    banner.style.transition = "transform .8s cubic-bezier(.22,.61,.36,1)";
+    banner.style.transform = "";
+  }
+
+  /* ---------------- boot ---------------- */
+  var raf = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+            function (cb) { return setTimeout(function () { cb(Date.now()); }, 16); };
+
+  resize();
+  window.addEventListener("resize", resize);
+  window.addEventListener("orientationchange", resize);
+
+  if (!reduced && ctx) {
+    raf(frame);
+
+    (function loop() {
+      var wait = 3000 + Math.random() * 4000;
+      setTimeout(function () {
+        makeArc();
+        if (Math.random() < 0.65) makeArc();
+        if (flash.animate) {
+          flash.animate(
+            [{ opacity: 0 }, { opacity: 0.45 }, { opacity: 0.1 }, { opacity: 0.3 }, { opacity: 0 }],
+            { duration: 460, easing: "ease-out" }
+          );
+        }
+        loop();
+      }, wait);
+    })();
+
+    if (window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
+      banner.addEventListener("mousemove", tilt);
+      banner.addEventListener("mouseleave", untilt);
+    }
+  }
+})();
+</script>
+</body>
+</html>
