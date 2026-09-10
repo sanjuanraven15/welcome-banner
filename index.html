@@ -297,6 +297,38 @@ h1{
   60%,100%{transform:translateX(520%)}
 }
 
+/* Guest / honouree name - same treatment as the headline, scaled down */
+.guest{
+  margin:0;
+  transform:translateZ(50px);
+  animation:
+    guestIn 1s cubic-bezier(.2,.8,.2,1) 1.60s both,
+    flicker 1.5s ease-out            1.62s both;
+}
+@keyframes guestIn{
+  from{transform:translateZ(50px) translateY(.34em) scale(.90);filter:blur(12px)}
+  to  {transform:translateZ(50px);filter:blur(0)}
+}
+.guest-name{
+  display:inline-block;
+  font-family:"Montserrat","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-weight:700;
+  letter-spacing:.06em;
+  font-size:3vw;
+  font-size:clamp(16px,3vw,84px);
+  background:linear-gradient(96deg,#ffffff 0%,#dfe6ff 20%,#FFC107 50%,#ffffff 76%,#cfd8ff 100%);
+  background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  animation:
+    shift     9s   ease-in-out 2.9s infinite,
+    breatheSm 4.5s ease-in-out 2.9s infinite;
+}
+@keyframes breatheSm{
+  0%,100%{filter:drop-shadow(0 6px 16px rgba(0,0,0,.6)) drop-shadow(0 0 12px rgba(255,193,7,.24))}
+  50%    {filter:drop-shadow(0 6px 16px rgba(0,0,0,.6)) drop-shadow(0 0 30px rgba(255,193,7,.60))}
+}
+
 /* Corner tech ticks */
 .corner{
   position:absolute;
@@ -333,6 +365,8 @@ h1{
 .lite .mark{animation:none}
 .lite .l2{animation:shift 9s ease-in-out 1.9s infinite;
           filter:drop-shadow(0 12px 26px rgba(0,0,0,.6))}
+.lite .guest-name{animation:shift 9s ease-in-out 2.9s infinite;
+          filter:drop-shadow(0 6px 16px rgba(0,0,0,.6))}
 .lite .rule::after{animation-duration:5s}
 
 /* ---------- Responsive ---------- */
@@ -394,6 +428,8 @@ h1{
       </h1>
 
       <div class="rule"></div>
+
+      <p class="guest"><span class="guest-name">Engr. Jun Lozada</span></p>
 
     </div>
   </section>
@@ -618,14 +654,14 @@ h1{
 })();
 
 /* ============================================================
-   Idle reload: with no input for 30s the page reloads, so the
+   Idle reload: with no input for 5 minutes the page reloads, so
    intro animation replays. On an untouched signage TV this makes
    the banner loop; any interaction restarts the countdown.
    ============================================================ */
 (function () {
   "use strict";
 
-  var IDLE_MS = 300000;
+  var IDLE_MS = 300000;   /* 5 minutes */
   var timer = null;
 
   function reload() {
