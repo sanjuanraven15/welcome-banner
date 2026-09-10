@@ -192,7 +192,7 @@ body{
   font-weight:300;letter-spacing:.22em;text-transform:uppercase;
   font-size:.7vw;
   font-size:clamp(7px,.7vw,16px);
-  color:#E6E8EB;opacity:.85;margin-top:4px;
+  color:#E6E8EB;opacity:.85;margin-top:15px;
 }
 
 /* ---------- Headline (the hero) ---------- */
@@ -214,7 +214,7 @@ h1{
   font-weight:700;
   letter-spacing:.34em;
   text-transform:uppercase;
-  margin-bottom:.34em;
+  margin-bottom:.75em;
   color:#dfe6ff;
   text-shadow:0 2px 18px rgba(0,0,0,.7);
 }
@@ -231,7 +231,9 @@ h1{
 
 /* line 2 - "Fuji-Haya Electric" */
 .l2-wrap{
-  display:inline-block;
+  /* block, not inline-block: an inline-block would sit in a line box whose
+     strut is h1's full font-size, adding ~60px of dead space above it */
+  display:block;
   transform-origin:50% 60%;
   animation:
     nameIn 1.1s cubic-bezier(.2,.8,.2,1) .60s both,
@@ -252,18 +254,22 @@ h1{
   38%{opacity:.62}
   46%,100%{opacity:1}
 }
+/* Secondary now: the guest name below is the hero, so the company line
+   steps back - smaller, cool white (amber is reserved for the name),
+   and a gentler glow. */
 .l2{
   display:block;
-  font-weight:900;
-  letter-spacing:-.02em;
+  font-size:.55em;
+  font-weight:800;
+  letter-spacing:-.01em;
   white-space:nowrap;
-  background:linear-gradient(96deg,#ffffff 0%,#dfe6ff 20%,#FFC107 50%,#ffffff 76%,#cfd8ff 100%);
+  background:linear-gradient(96deg,#ffffff 0%,#e8edff 30%,#ffffff 58%,#cfd8ff 100%);
   background-size:280% 100%;
   -webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;
   animation:
     shift 9s ease-in-out 1.9s infinite,
-    breathe 4.5s ease-in-out 1.9s infinite;
+    breatheSm 4.5s ease-in-out 1.9s infinite;
 }
 @keyframes shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @keyframes breathe{
@@ -309,20 +315,22 @@ h1{
   from{transform:translateZ(50px) translateY(.34em) scale(.90);filter:blur(12px)}
   to  {transform:translateZ(50px);filter:blur(0)}
 }
+/* The hero: largest type on the banner, full gold gradient, big glow. */
 .guest-name{
   display:inline-block;
   font-family:"Montserrat","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  font-weight:700;
-  letter-spacing:.06em;
-  font-size:3vw;
-  font-size:clamp(16px,3vw,84px);
-  background:linear-gradient(96deg,#ffffff 0%,#dfe6ff 20%,#FFC107 50%,#ffffff 76%,#cfd8ff 100%);
+  font-weight:900;
+  letter-spacing:-.005em;
+  white-space:nowrap;
+  font-size:7.6vw;
+  font-size:clamp(30px,7.6vw,220px);
+  background:linear-gradient(96deg,#ffffff 0%,#ffe9a8 18%,#FFC107 46%,#fff3cd 70%,#FFC107 100%);
   background-size:280% 100%;
   -webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;
   animation:
-    shift     9s   ease-in-out 2.9s infinite,
-    breatheSm 4.5s ease-in-out 2.9s infinite;
+    shift   9s   ease-in-out 2.9s infinite,
+    breathe 4.5s ease-in-out 2.9s infinite;
 }
 @keyframes breatheSm{
   0%,100%{filter:drop-shadow(0 6px 16px rgba(0,0,0,.6)) drop-shadow(0 0 12px rgba(255,193,7,.24))}
@@ -364,9 +372,9 @@ h1{
 .lite .grid{animation:none}
 .lite .mark{animation:none}
 .lite .l2{animation:shift 9s ease-in-out 1.9s infinite;
-          filter:drop-shadow(0 12px 26px rgba(0,0,0,.6))}
-.lite .guest-name{animation:shift 9s ease-in-out 2.9s infinite;
           filter:drop-shadow(0 6px 16px rgba(0,0,0,.6))}
+.lite .guest-name{animation:shift 9s ease-in-out 2.9s infinite;
+          filter:drop-shadow(0 12px 26px rgba(0,0,0,.6))}
 .lite .rule::after{animation-duration:5s}
 
 /* ---------- Responsive ---------- */
@@ -375,6 +383,7 @@ h1{
   h1{font-size:10vw}
   h1{font-size:clamp(30px,10vw,64px)}
   .l2{white-space:normal}
+  .guest-name{white-space:normal;font-size:clamp(26px,9vw,60px)}
   .l1{letter-spacing:.22em}
   .lockup{top:22px;left:22px;gap:9px}
   .mark{width:56px}
@@ -429,6 +438,8 @@ h1{
 
       <div class="rule"></div>
 
+      <!-- The guest name is the hero here. For a banner with no name,
+           use welcome-plain.html instead. -->
       <p class="guest"><span class="guest-name">Engr. Jun Lozada</span></p>
 
     </div>
