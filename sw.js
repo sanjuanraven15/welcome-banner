@@ -5,11 +5,11 @@
    Only active over http(s); ignored on file:// USB playback,
    where the files are already local.
    ============================================================ */
-var CACHE = 'fujihaya-banner-v1';
+var CACHE = 'fujihaya-banner-v8';
 
 /* Relative paths: works whether the site is at the domain root
    or under a GitHub Pages project path like /welcome-banner/. */
-var ASSETS = ['./', './index.html', './logo.png'];
+var ASSETS = ['./', './index.html', './welcome-plain.html', './logo.png'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(
