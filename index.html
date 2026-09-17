@@ -310,29 +310,48 @@ h1{
   to  {opacity:1;transform:translateZ(50px);letter-spacing:.34em}
 }
 
+/* institution line under the names */
+.affil{
+  margin:.2vw 0 0;
+  font-family:"Montserrat","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-weight:600;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  font-size:1.5vw;
+  font-size:clamp(11px,1.5vw,40px);
+  color:#E6E8EB;
+  text-shadow:0 2px 14px rgba(0,0,0,.6),0 0 22px rgba(255,255,255,.12);
+  transform:translateZ(50px);
+  animation:labelIn 1s cubic-bezier(.2,.8,.2,1) 2.25s both;
+}
+/* labelIn ends on the eyebrow's tracking; override the resting value here */
+.affil{animation-name:affilIn}
+@keyframes affilIn{
+  from{opacity:0;transform:translateZ(50px) translateY(12px);letter-spacing:.55em}
+  to  {opacity:1;transform:translateZ(50px);letter-spacing:.3em}
+}
+
 .guests{
   list-style:none;margin:0;padding:0;
   display:grid;
-  grid-template-columns:1fr 1fr;      /* equal columns, sized to the widest name */
-  grid-gap:1.1vw 1.2vw;
-  gap:1.1vw 1.2vw;
+  grid-template-columns:1fr;          /* one centred column */
+  justify-items:center;
+  grid-gap:.5vw;
+  gap:.5vw;
   transform:translateZ(50px);
 }
 .guest{
   position:relative;
   margin:0;
-  display:flex;align-items:center;
-  gap:1.1vw;
-  gap:clamp(10px,1.1vw,30px);
-  padding:.45vw 1.2vw .45vw 0;
-  padding:clamp(4px,.45vw,14px) clamp(10px,1.2vw,34px) clamp(4px,.45vw,14px) 0;
-  text-align:left;
+  padding:.2vw 0;
+  text-align:center;
   animation:
     guestIn 1s cubic-bezier(.2,.8,.2,1) both,
     flicker 1.2s ease-out            both;
 }
-/* gold accent bar on the left of each name */
+/* gold accent bar (unused in the centred layout - kept for the 2-column variant) */
 .guest::before{
+  display:none;
   content:"";flex:none;align-self:stretch;
   width:5px;min-height:1.2em;border-radius:5px;
   background:linear-gradient(180deg,#ffe082 0%,#FFC107 50%,#ff9f00 100%);
@@ -356,8 +375,8 @@ h1{
   letter-spacing:.005em;
   line-height:1.2;
   white-space:nowrap;
-  font-size:3vw;                        /* the ceiling that still fits two columns */
-  font-size:clamp(17px,3vw,86px);
+  font-size:3.5vw;
+  font-size:clamp(20px,3.5vw,100px);
   /* full gold, with a bright band that sweeps through on the shift animation */
   background:linear-gradient(96deg,#fff6d5 0%,#ffe08a 22%,#FFC107 48%,#fff3cd 66%,#FFC107 100%);
   background-size:280% 100%;
@@ -432,9 +451,10 @@ h1{
   h1{font-size:10vw}
   h1{font-size:clamp(30px,10vw,64px)}
   .l2{white-space:normal}
-  .guest-name{white-space:normal;font-size:clamp(15px,5vw,30px);line-height:1.25}
+  .guest-name{white-space:normal;font-size:clamp(18px,6.5vw,36px);line-height:1.25}
   .guests{grid-template-columns:1fr;grid-gap:8px;gap:8px;width:100%}
-  .guest{padding:6px 10px 6px 0;gap:10px}
+  .guest{padding:4px 0}
+  .affil{font-size:11px;letter-spacing:.22em}
   .roster-label{font-size:9.5px;letter-spacing:.26em}
   .l1{letter-spacing:.22em}
   .lockup{top:22px;left:22px;gap:9px}
@@ -494,13 +514,11 @@ h1{
            use welcome-plain.html instead. -->
       <p class="roster-label">Our Distinguished Guests</p>
       <ul class="guests">
-        <li class="guest"><span class="guest-name">Br. Bobby Casingal, FSC</span></li>
-        <li class="guest"><span class="guest-name">Dean Cherrie Villafuerte</span></li>
-        <li class="guest"><span class="guest-name">Engr. Agnes Perez</span></li>
-        <li class="guest"><span class="guest-name">Engr. Gener Matanguihan</span></li>
-        <li class="guest"><span class="guest-name">Ms. Grace Sanchez</span></li>
-        <li class="guest"><span class="guest-name">Ms. Cestie Quinto</span></li>
+        <li class="guest"><span class="guest-name">Br. Bernard Oca</span></li>
+        <li class="guest"><span class="guest-name">Dr. Emiline Sevilla</span></li>
+        <li class="guest"><span class="guest-name">Mr. Marc Macatangay</span></li>
       </ul>
+      <p class="affil">of De La Salle University</p>
 
     </div>
   </section>

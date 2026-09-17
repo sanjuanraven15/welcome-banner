@@ -5,7 +5,7 @@
    Only active over http(s); ignored on file:// USB playback,
    where the files are already local.
    ============================================================ */
-var CACHE = 'fujihaya-banner-v8';
+var CACHE = 'fujihaya-banner-v13';
 
 /* Relative paths: works whether the site is at the domain root
    or under a GitHub Pages project path like /welcome-banner/. */
